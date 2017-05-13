@@ -1,27 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using TestRazor.ViewModel;
+﻿using System.Web.Mvc;
 using TestRazor.Models;
+using TestRazor.ViewModel;
 
 namespace TestRazor.Controllers
 {
     public class HomeController : Controller
     {
+
+        GestorPersonas gestor = new GestorPersonas();
         // GET: Home
         public ActionResult Index()
         {
-
-
-
-            var gestorVentas = new GestorVentas();
-            var ventas = new Venta();
-            ventas.Clientes = gestorVentas.ObtenerClientes();
-            ventas.Productos = gestorVentas.ObtenerProductos();
-            return View(ventas);
+            var persona = new ViewModel.Persona { Apellido = "TestLastName", Nombre = "TestFirstName" };
+            return View(persona);
         }
+
+        public ActionResult Alta()
+        {
+            return View();
+        }
+
+        //public ActionResult Guardar(ViewModel.Persona persona)
+        //{
+
+
+
+
+        //}
+
     }
-    
+
+
 }

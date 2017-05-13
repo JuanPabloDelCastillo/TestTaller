@@ -1,14 +1,16 @@
-﻿
+﻿@model TestRazor.ViewModel.Persona
+
 @{
     ViewBag.Title = "Index";
 }
-@using TestRazor.Controllers
-@using TestRazor.ViewModel
-@using TestRazor.Models
 
-@model Venta
 <h2>Index</h2>
-@for (int i = 0; i < Model.Clientes.Count; i++)
+
+
+
+@for (int i = 0; i < 10; i++)
 {
-    <p>Numero de Cliente @i @Model.Clientes[i].Nombre @Model.Clientes[i].Apellido</p>
+    <p>@i</p>
 }
+
+

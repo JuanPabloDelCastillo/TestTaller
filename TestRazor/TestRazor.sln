@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRazor", "TestRazor\TestRazor.csproj", "{F8C9D810-C26A-4125-9543-FEF8E3B8B5AA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRazor", "TestRazor\TestRazor.csproj", "{1E6D5741-551C-4EEC-8797-70972A8FFCBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F8C9D810-C26A-4125-9543-FEF8E3B8B5AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F8C9D810-C26A-4125-9543-FEF8E3B8B5AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F8C9D810-C26A-4125-9543-FEF8E3B8B5AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F8C9D810-C26A-4125-9543-FEF8E3B8B5AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E6D5741-551C-4EEC-8797-70972A8FFCBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E6D5741-551C-4EEC-8797-70972A8FFCBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E6D5741-551C-4EEC-8797-70972A8FFCBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E6D5741-551C-4EEC-8797-70972A8FFCBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

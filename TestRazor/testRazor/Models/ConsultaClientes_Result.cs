@@ -10,9 +10,8 @@
 namespace TestRazor.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Cliente
+    public partial class ConsultaClientes_Result
     {
         public int Id { get; set; }
         public string Apellido { get; set; }
