@@ -12,11 +12,15 @@ namespace TestRazor.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Cliente
+    public partial class DetalleVenta
     {
         public int Id { get; set; }
-        public string Apellido { get; set; }
-        public string Nombre { get; set; }
-        public int Edad { get; set; }
+        public Nullable<int> IdVenta { get; set; }
+        public Nullable<int> IdProducto { get; set; }
+        public Nullable<decimal> Precio { get; set; }
+        public Nullable<int> Cantidad { get; set; }
+    
+        public virtual Producto Producto { get; set; }
+        public virtual Venta Venta { get; set; }
     }
 }

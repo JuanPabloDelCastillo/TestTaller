@@ -6,6 +6,11 @@
     <edmx:Diagrams>
       <Diagram DiagramId="9897e6d37aff4263925a7f2b991aef6d" Name="Diagram1">
         <EntityTypeShape EntityType="TallerDBModel.Cliente" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TallerDBModel.DetalleVenta" Width="1.5" PointX="5.625" PointY="1" />
+        <EntityTypeShape EntityType="TallerDBModel.Producto" Width="1.5" PointX="3.375" PointY="5.125" />
+        <EntityTypeShape EntityType="TallerDBModel.Venta" Width="1.5" PointX="3.375" PointY="1.375" />
+        <AssociationConnector Association="TallerDBModel.FK_DetalleVenta_Producto" />
+        <AssociationConnector Association="TallerDBModel.FK_DetalleVenta_Venta" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

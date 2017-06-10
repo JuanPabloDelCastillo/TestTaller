@@ -14,11 +14,66 @@
           <Property Name="Nombre" Type="varchar" MaxLength="70" Nullable="false" />
           <Property Name="Edad" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errores durante la generación:
-advertencia 6013: La tabla o vista 'TallerDB.dbo.Table_1' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVenta" Type="int" />
+          <Property Name="IdProducto" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="Cantidad" Type="int" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Precio" Type="decimal" Precision="6" Scale="2" />
+          <Property Name="Stock" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TallerDB.dbo.Prueba' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Prueba">
+          <Property Name="id" Type="int" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'TallerDB.dbo.Table_1' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="Table_1">
           <Property Name="dfds" Type="nchar" MaxLength="10" />
         </EntityType>-->
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fecha" Type="date" />
+        </EntityType>
+        <Association Name="FK_DetalleVenta_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="0..1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVenta_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="0..1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="ConsultaClientes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="InsertarCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Apellido" Type="varchar" Mode="In" />
@@ -28,6 +83,17 @@ advertencia 6013: La tabla o vista 'TallerDB.dbo.Table_1' no tiene definida una 
         <Function Name="ObtenerMayor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <EntityContainer Name="TallerDBModelStoreContainer">
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetalleVenta_Producto" Association="Self.FK_DetalleVenta_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVenta_Venta" Association="Self.FK_DetalleVenta_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -50,6 +116,17 @@ advertencia 6013: La tabla o vista 'TallerDB.dbo.Table_1' no tiene definida una 
             <Parameter Name="Nombre" Mode="In" Type="String" />
             <Parameter Name="Edad" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="DetalleVenta" EntityType="TallerDBModel.DetalleVenta" />
+          <EntitySet Name="Producto" EntityType="TallerDBModel.Producto" />
+          <EntitySet Name="Venta" EntityType="TallerDBModel.Venta" />
+          <AssociationSet Name="FK_DetalleVenta_Producto" Association="TallerDBModel.FK_DetalleVenta_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVenta_Venta" Association="TallerDBModel.FK_DetalleVenta_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="ConsultaClientes_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -57,6 +134,60 @@ advertencia 6013: La tabla o vista 'TallerDB.dbo.Table_1' no tiene definida una 
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="70" />
           <Property Type="Int32" Name="Edad" Nullable="false" />
         </ComplexType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVenta" Type="Int32" />
+          <Property Name="IdProducto" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Cantidad" Type="Int32" />
+          <NavigationProperty Name="Producto" Relationship="TallerDBModel.FK_DetalleVenta_Producto" FromRole="DetalleVenta" ToRole="Producto" />
+          <NavigationProperty Name="Venta" Relationship="TallerDBModel.FK_DetalleVenta_Venta" FromRole="DetalleVenta" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="6" Scale="2" />
+          <Property Name="Stock" Type="Int32" />
+          <NavigationProperty Name="DetalleVenta" Relationship="TallerDBModel.FK_DetalleVenta_Producto" FromRole="Producto" ToRole="DetalleVenta" />
+        </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="DetalleVenta" Relationship="TallerDBModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
+        </EntityType>
+        <Association Name="FK_DetalleVenta_Producto">
+          <End Type="TallerDBModel.Producto" Role="Producto" Multiplicity="0..1" />
+          <End Type="TallerDBModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVenta_Venta">
+          <End Type="TallerDBModel.Venta" Role="Venta" Multiplicity="0..1" />
+          <End Type="TallerDBModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="IdVenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -84,6 +215,35 @@ advertencia 6013: La tabla o vista 'TallerDB.dbo.Table_1' no tiene definida una 
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertarCliente" FunctionName="TallerDBModel.Store.InsertarCliente" />
+          <EntitySetMapping Name="DetalleVenta">
+            <EntityTypeMapping TypeName="TallerDBModel.DetalleVenta">
+              <MappingFragment StoreEntitySet="DetalleVenta">
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdVenta" ColumnName="IdVenta" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="TallerDBModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="TallerDBModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
